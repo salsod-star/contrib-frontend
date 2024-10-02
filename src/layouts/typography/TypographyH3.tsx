@@ -4,7 +4,7 @@ interface TypographyH3Props {
 
 function TypographyH3({ children }: TypographyH3Props) {
   return (
-    <h3 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+    <h3 className="text-3xl font-bold tracking-tight lg:text-4xl">
       {children}
     </h3>
   );

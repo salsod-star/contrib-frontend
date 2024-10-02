@@ -3,10 +3,6 @@ interface TypographyPProps {
 }
 
 function TypographyP({ children }: TypographyPProps) {
-  return (
-    <p className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-      {children}
-    </p>
-  );
+  return <p className="text-base lg:text-lg text-gray-400">{children}</p>;
 }
 export default TypographyP;
