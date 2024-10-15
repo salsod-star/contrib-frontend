@@ -13,8 +13,11 @@ import { UserSignupSchema, UserSignupSchemaType } from "@/models/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useRegister from "../hooks/useRegister";
 
 function RegistrationForm() {
+  const { mutate } = useRegister();
+
   const form = useForm<UserSignupSchemaType>({
     resolver: zodResolver(UserSignupSchema),
     mode: "onChange",
@@ -27,6 +30,12 @@ function RegistrationForm() {
     },
   });
 
+  const onSubmit = (payload: UserSignupSchemaType) => {
+    const response = mutate(payload);
+
+    console.log(response);
+  };
+
   return (
     <Card className="mx-auto max-w-md my-20 border-gray-700">
       <CardHeader>
@@ -38,7 +47,7 @@ function RegistrationForm() {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form className="grid gap-3">
+          <form className="grid gap-3" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-5">
               <FormFieldInput
                 control={form.control}
@@ -47,6 +56,7 @@ function RegistrationForm() {
                 type="text"
                 placeholder="John"
                 inputClassName="border-gray-700"
+                required={true}
               />
               <FormFieldInput
                 control={form.control}
@@ -55,6 +65,7 @@ function RegistrationForm() {
                 type="text"
                 placeholder="Doe"
                 inputClassName="border-gray-700"
+                required={true}
               />
             </div>
 
@@ -65,6 +76,7 @@ function RegistrationForm() {
               type="text"
               placeholder="JohDoe"
               inputClassName="border-gray-700"
+              required={true}
             />
 
             <FormFieldInput
@@ -74,6 +86,7 @@ function RegistrationForm() {
               type="email"
               placeholder="JohnDoe@gmail.com"
               inputClassName="border-gray-700"
+              required={true}
             />
 
             <FormFieldInput
@@ -83,6 +96,7 @@ function RegistrationForm() {
               type="password"
               placeholder="**********"
               inputClassName="border-gray-700"
+              required={true}
             />
 
             <Button type="submit" className="w-full bg-sky-700">

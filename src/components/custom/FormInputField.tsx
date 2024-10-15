@@ -28,14 +28,16 @@ function FormFieldInput(props: FormFieldInputProps) {
       render={({ field }) => (
         <FormItem>
           <div className="flex justify-between items-center gap-5">
-            <FormLabel>{props.label}</FormLabel>
+            <FormLabel className="flex items-center gap-1">
+              <span>{props.label}</span>
+              {props.required && <span className="text-red-400">*</span>}
+            </FormLabel>
             {props.children}
           </div>
           <FormControl>
             <Input
-              type={props.label}
+              type={props.type}
               placeholder={props.placeholder}
-              required={props.required}
               {...field}
               className={props.inputClassName}
             />

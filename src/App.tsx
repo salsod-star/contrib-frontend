@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import Header from "./layouts/Header";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <main>
         <Outlet />
       </main>
+      <Toaster />
     </>
   );
 }

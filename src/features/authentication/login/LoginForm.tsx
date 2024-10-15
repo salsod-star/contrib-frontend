@@ -13,8 +13,11 @@ import { UserLoginSchema, UserLoginSchemaType } from "@/models/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
 function LoginForm() {
+  const { mutate } = useLogin();
+
   const form = useForm<UserLoginSchemaType>({
     resolver: zodResolver(UserLoginSchema),
     mode: "onChange",
@@ -23,6 +26,10 @@ function LoginForm() {
       password: "",
     },
   });
+
+  const onSubmit = (data: UserLoginSchemaType) => {
+    mutate(data);
+  };
 
   return (
     <Card className="mx-auto max-w-md my-20 border-gray-700">
@@ -34,7 +41,7 @@ function LoginForm() {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form className="grid gap-4">
+          <form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormFieldInput
               control={form.control}
               label="Email"
